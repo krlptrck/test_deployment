@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_REGION: eu-west-2
-  ECR_REPOSITORY: test_deployment
+  ECR_REPOSITORY: test
   CLUSTER_NAME: test
   
 permissions:
