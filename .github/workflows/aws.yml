@@ -7,6 +7,7 @@ on:
 env:
   AWS_REGION: eu-west-2
   ECR_REPOSITORY: test_deployment
+  ECR_REGISTRY: 537374183265.dkr.ecr.eu-west-2.amazonaws.com/test_deployment
   CLUSTER_NAME: test_cluster
   
 permissions:
@@ -55,6 +56,9 @@ jobs:
     - name: Verify kubectl configuration
       run: kubectl config view
       
+    - name: Authenticate with EKS cluster
+      run: aws eks get-token --cluster-name $CLUSTER_NAME --region $AWS_REGION | awk '{print $NF}' | docker login -u AWS --password-stdin https://$ECR_REGISTRY
+
     - name: Deploy to EKS
       env:
         IMAGE: ${{ steps.build-image.outputs.image }}
