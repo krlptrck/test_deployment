@@ -49,6 +49,9 @@ jobs:
     - name: Update kube config
       run: aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
 
+    - name: Authenticate to EKS cluster
+      run: kubectl get pods
+
     - name: Check AWS Credentials
       run: aws sts get-caller-identity
 
