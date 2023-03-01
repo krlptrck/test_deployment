@@ -7,8 +7,7 @@ on:
 env:
   AWS_REGION: eu-west-2
   ECR_REPOSITORY: test_deployment
-  ECR_REGISTRY: 537374183265.dkr.ecr.eu-west-2.amazonaws.com/test_deployment
-  CLUSTER_NAME: test_cluster
+  CLUSTER_NAME: test
   
 permissions:
   contents: read
