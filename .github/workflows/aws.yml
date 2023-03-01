@@ -48,6 +48,12 @@ jobs:
 
     - name: Update kube config
       run: aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
+
+    - name: Check AWS Credentials
+      run: aws sts get-caller-identity
+
+    - name: Verify kubectl configuration
+      run: kubectl config view
       
     - name: Deploy to EKS
       env:
