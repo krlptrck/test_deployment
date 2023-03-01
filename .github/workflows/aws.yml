@@ -47,7 +47,7 @@ jobs:
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
     - name: Update kube config
-      run: aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
+      run: aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME --role-arn arn:aws:iam::537374183265:role/eksClusterRole
 
     - name: Authenticate to EKS cluster
       run: kubectl get pods
