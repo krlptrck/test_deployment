@@ -35,6 +35,7 @@ jobs:
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
+      working-directory: src
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
@@ -56,6 +57,7 @@ jobs:
       run: kubectl config view
       
     - name: Deploy to EKS
+      working-directory: src
       env:
         IMAGE: ${{ steps.build-image.outputs.image }}
       run: |
