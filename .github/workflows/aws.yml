@@ -59,4 +59,4 @@ jobs:
       env:
         IMAGE: ${{ steps.build-image.outputs.image }}
       run: |
-        envsubst < deployment.yml | kubectl apply -f -
+        envsubst < deployment.yaml | kubectl apply -f -
