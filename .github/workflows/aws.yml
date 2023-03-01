@@ -45,3 +45,12 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+    - name: Update kube config
+      run: aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
+      
+    - name: Deploy to EKS
+      env:
+        IMAGE: ${{ steps.build-image.outputs.image }}
+      run: |
+        envsubst < deployment.yml | kubectl apply -f -
